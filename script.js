@@ -141,11 +141,11 @@ function randomHexValue() {
 }
 
 function randomHslValue() {
-  let randomHsl = randomValue(0, 358)
+  let randomHsl = randomValue(0, 360)
   let rand1 = randomValue(10, 100)
   let rand2 = randomValue(10, 100)
 
-  span.textContent = `hsl(${randomHsl},${rand1}%,${rand2}%)`
-  changeBackgroundColor(`hsl(${randomHsl},${rand1}%,${rand2}%)`)
-  changeSpanColor(`hsl(${randomHsl},${rand1}%,${rand2}%)`)
+  span.textContent = `hsl(${randomHsl}, ${rand1}%, ${rand2}%)`
+  changeBackgroundColor(`hsl(${randomHsl}, ${rand1}%, ${rand2}%)`)
+  changeSpanColor(`hsl(${randomHsl}, ${rand1}%, ${rand2}%)`)
 }
