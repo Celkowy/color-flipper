@@ -35,7 +35,6 @@ switchButton.addEventListener('click', () => {
 navTable.forEach(element => {
   element.addEventListener('click', () => {
     if (element.className == 'colors-name') {
-      clearBorders()
       navHandling.colorName = true
       fetchColors()
     }
