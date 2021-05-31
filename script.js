@@ -9,12 +9,9 @@ let navHandling = {
   hsl: false,
 }
 
-let switcher = true
-
 const hexTable = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F']
 
 //nav
-
 const navTable = [
   document.querySelector('.colors-name'),
   document.querySelector('.rgb'),
@@ -37,7 +34,6 @@ navTable.forEach(element => {
     }
 
     if (element.className == 'rgb') {
-      switcher = true
       Object.keys(navHandling).forEach(key => {
         navHandling[key] = false
       })
@@ -84,10 +80,6 @@ navTable.forEach(element => {
 //random colors from json file
 fetchColors()
 
-function randomNumber(max) {
-  return Math.floor(Math.random() * max)
-}
-
 function changeBackgroundColor(color) {
   return (document.body.style.backgroundColor = color)
 }
@@ -106,7 +98,7 @@ function fetchColors() {
   fetch('colors.json')
     .then(response => response.json())
     .then(data => {
-      let number = randomNumber(data.colors.length)
+      let number = randomNumber(0, data.colors.length - 1)
       changeBackgroundColor(data.colors[number])
       switchTextValue(data.colors[number])
       changeSpanColor(data.colors[number])
@@ -114,25 +106,24 @@ function fetchColors() {
 }
 
 //rgb random
-
 function randomExec() {
-  random1 = randomValue(0, 255)
-  random2 = randomValue(0, 255)
-  random3 = randomValue(0, 255)
+  random1 = randomNumber(0, 255)
+  random2 = randomNumber(0, 255)
+  random3 = randomNumber(0, 255)
   span.textContent = `rgb(${random1}, ${random2}, ${random3})`
   changeBackgroundColor(`rgb(${random1},${random2},${random3})`)
   changeSpanColor(`rgb(${random1},${random2},${random3})`)
 }
 
-function randomValue(min, max) {
+function randomNumber(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min
 }
 
 function randomHexValue() {
-  let randomHex = `#${hexTable[randomValue(0, hexTable.length - 1)]}${hexTable[randomValue(0, hexTable.length - 1)]}${
-    hexTable[randomValue(0, hexTable.length - 1)]
-  }${hexTable[randomValue(0, hexTable.length - 1)]}${hexTable[randomValue(0, hexTable.length - 1)]}${
-    hexTable[randomValue(0, hexTable.length - 1)]
+  let randomHex = `#${hexTable[randomNumber(0, hexTable.length - 1)]}${hexTable[randomNumber(0, hexTable.length - 1)]}${
+    hexTable[randomNumber(0, hexTable.length - 1)]
+  }${hexTable[randomNumber(0, hexTable.length - 1)]}${hexTable[randomNumber(0, hexTable.length - 1)]}${
+    hexTable[randomNumber(0, hexTable.length - 1)]
   }`
 
   span.textContent = randomHex
@@ -141,9 +132,9 @@ function randomHexValue() {
 }
 
 function randomHslValue() {
-  let randomHsl = randomValue(0, 360)
-  let rand1 = randomValue(10, 100)
-  let rand2 = randomValue(10, 100)
+  let randomHsl = randomNumber(0, 360)
+  let rand1 = randomNumber(10, 100)
+  let rand2 = randomNumber(10, 100)
 
   span.textContent = `hsl(${randomHsl}, ${rand1}%, ${rand2}%)`
   changeBackgroundColor(`hsl(${randomHsl}, ${rand1}%, ${rand2}%)`)
