@@ -57,11 +57,7 @@ navTable.forEach(element => {
       randomHslValue()
     }
 
-    navTable.forEach(el => {
-      el.style.borderColor = 'white'
-    })
-    element.style.borderColor = 'black'
-    element.style.transition = 'border-color .3s'
+    switchingBlackBorder(element)
   })
 })
 
@@ -131,4 +127,12 @@ function clearBorders() {
   Object.keys(navHandling).forEach(key => {
     navHandling[key] = false
   })
+}
+
+function switchingBlackBorder(element) {
+  navTable.forEach(el => {
+    el.style.borderColor = 'white'
+  })
+  element.style.borderColor = 'black'
+  element.style.transition = 'border-color .3s'
 }
