@@ -86,7 +86,7 @@ function fetchColors() {
   fetch('colors.json')
     .then(response => response.json())
     .then(data => {
-      let number = randomNumber(data.colors.length)
+      let number = randomNumber(0, data.colors.length - 1)
       changeBackgroundColor(data.colors[number])
       switchTextValue(data.colors[number])
       changeSpanColor(data.colors[number])
@@ -94,23 +94,23 @@ function fetchColors() {
 }
 
 function randomExec() {
-  random1 = randomValue(0, 255)
-  random2 = randomValue(0, 255)
-  random3 = randomValue(0, 255)
+  random1 = randomNumber(0, 255)
+  random2 = randomNumber(0, 255)
+  random3 = randomNumber(0, 255)
   span.textContent = `rgb(${random1}, ${random2}, ${random3})`
   changeBackgroundColor(`rgb(${random1},${random2},${random3})`)
   changeSpanColor(`rgb(${random1},${random2},${random3})`)
 }
 
-function randomValue(min, max) {
+function randomNumber(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min
 }
 
 function randomHexValue() {
-  let randomHex = `#${hexTable[randomValue(0, hexTable.length - 1)]}${hexTable[randomValue(0, hexTable.length - 1)]}${
-    hexTable[randomValue(0, hexTable.length - 1)]
-  }${hexTable[randomValue(0, hexTable.length - 1)]}${hexTable[randomValue(0, hexTable.length - 1)]}${
-    hexTable[randomValue(0, hexTable.length - 1)]
+  let randomHex = `#${hexTable[randomNumber(0, hexTable.length - 1)]}${hexTable[randomNumber(0, hexTable.length - 1)]}${
+    hexTable[randomNumber(0, hexTable.length - 1)]
+  }${hexTable[randomNumber(0, hexTable.length - 1)]}${hexTable[randomNumber(0, hexTable.length - 1)]}${
+    hexTable[randomNumber(0, hexTable.length - 1)]
   }`
 
   span.textContent = randomHex
@@ -119,9 +119,9 @@ function randomHexValue() {
 }
 
 function randomHslValue() {
-  let randomHsl = randomValue(0, 360)
-  let rand1 = randomValue(10, 100)
-  let rand2 = randomValue(10, 100)
+  let randomHsl = randomNumber(0, 360)
+  let rand1 = randomNumber(10, 100)
+  let rand2 = randomNumber(10, 100)
 
   span.textContent = `hsl(${randomHsl}, ${rand1}%, ${rand2}%)`
   changeBackgroundColor(`hsl(${randomHsl}, ${rand1}%, ${rand2}%)`)
