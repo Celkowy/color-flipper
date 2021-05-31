@@ -9,11 +9,7 @@ let navHandling = {
   hsl: false,
 }
 
-let switcher = true
-
 const hexTable = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F']
-
-//nav
 
 const navTable = [
   document.querySelector('.colors-name'),
@@ -22,55 +18,44 @@ const navTable = [
   document.querySelector('.hsl'),
 ]
 
+fetchColors()
+
+switchButton.addEventListener('click', () => {
+  if (navHandling.colorName) {
+    fetchColors()
+  } else if (navHandling.rgb) {
+    randomExec()
+  } else if (navHandling.hex) {
+    randomHexValue()
+  } else if (navHandling.hsl) {
+    randomHslValue()
+  }
+})
+
 navTable.forEach(element => {
   element.addEventListener('click', () => {
     if (element.className == 'colors-name') {
-      Object.keys(navHandling).forEach(key => {
-        navHandling[key] = false
-      })
+      clearBorders()
       navHandling.colorName = true
       fetchColors()
-      switchButton.removeEventListener('click', randomHslValue, false)
-      switchButton.removeEventListener('click', randomExec, false)
-      switchButton.removeEventListener('click', randomHexValue, false)
-      switchButton.addEventListener('click', fetchColors)
     }
 
     if (element.className == 'rgb') {
-      switcher = true
-      Object.keys(navHandling).forEach(key => {
-        navHandling[key] = false
-      })
+      clearBorders()
       navHandling.rgb = true
       randomExec()
-      switchButton.removeEventListener('click', fetchColors, false)
-      switchButton.removeEventListener('click', randomHslValue, false)
-      switchButton.removeEventListener('click', randomHexValue, false)
-      switchButton.addEventListener('click', randomExec)
     }
 
     if (element.className == 'hex') {
-      Object.keys(navHandling).forEach(key => {
-        navHandling[key] = false
-      })
+      clearBorders()
       navHandling.hex = true
       randomHexValue()
-      switchButton.removeEventListener('click', fetchColors, false)
-      switchButton.removeEventListener('click', randomExec, false)
-      switchButton.removeEventListener('click', randomHslValue, false)
-      switchButton.addEventListener('click', randomHexValue)
     }
 
     if (element.className == 'hsl') {
-      Object.keys(navHandling).forEach(key => {
-        navHandling[key] = false
-      })
+      clearBorders()
       navHandling.hsl = true
       randomHslValue()
-      switchButton.removeEventListener('click', fetchColors, false)
-      switchButton.removeEventListener('click', randomExec, false)
-      switchButton.removeEventListener('click', randomHexValue, false)
-      switchButton.addEventListener('click', randomHslValue)
     }
 
     navTable.forEach(el => {
@@ -80,9 +65,6 @@ navTable.forEach(element => {
     element.style.transition = 'border-color .3s'
   })
 })
-
-//random colors from json file
-fetchColors()
 
 function randomNumber(max) {
   return Math.floor(Math.random() * max)
@@ -100,8 +82,6 @@ function changeSpanColor(color) {
   span.style.color = color
 }
 
-switchButton.addEventListener('click', fetchColors)
-
 function fetchColors() {
   fetch('colors.json')
     .then(response => response.json())
@@ -112,8 +92,6 @@ function fetchColors() {
       changeSpanColor(data.colors[number])
     })
 }
-
-//rgb random
 
 function randomExec() {
   random1 = randomValue(0, 255)
@@ -148,4 +126,10 @@ function randomHslValue() {
   span.textContent = `hsl(${randomHsl}, ${rand1}%, ${rand2}%)`
   changeBackgroundColor(`hsl(${randomHsl}, ${rand1}%, ${rand2}%)`)
   changeSpanColor(`hsl(${randomHsl}, ${rand1}%, ${rand2}%)`)
+}
+
+function clearBorders() {
+  Object.keys(navHandling).forEach(key => {
+    navHandling[key] = false
+  })
 }
