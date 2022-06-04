@@ -1,7 +1,7 @@
 const switchButton = document.querySelector('button')
 const span = document.querySelector('span')
 const content = document.querySelector('.content')
-
+const color = document.querySelector('.color')
 let navHandling = {
   colorName: true,
   rgb: false,
@@ -20,6 +20,10 @@ const navTable = [
 
 fetchColors()
 
+color.addEventListener('click', () => {
+  navigator.clipboard.writeText(color.textContent)
+})
+
 switchButton.addEventListener('click', () => {
   if (navHandling.colorName) {
     fetchColors()
@@ -30,6 +34,7 @@ switchButton.addEventListener('click', () => {
   } else if (navHandling.hsl) {
     randomHslValue()
   }
+  console.log(color.textContent)
 })
 
 navTable.forEach(element => {

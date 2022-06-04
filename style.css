@@ -48,6 +48,7 @@ body {
 }
 
 h1 {
+  display: block;
   color: white;
 }
 
@@ -59,25 +60,36 @@ button {
   color: white;
 }
 
+.color {
+  border: 2px solid white;
+  border-radius: 10px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.color:active {
+  border-color: red;
+  transform: scale(0.98);
+}
+
 .content {
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 25px;
-  min-width: 800px;
+  min-width: 1000px;
 }
 
 button {
-  width: 100px;
+  width: auto;
   padding: 10px 20px;
   cursor: pointer;
   transition: background-color 0.1s, color 0.1s;
   font-size: 18px;
-  width: 150px;
 }
 
 span {
-  margin-left: 15px;
+  margin: 0 15px;
   font-size: 32px;
   font-weight: bold;
 }
